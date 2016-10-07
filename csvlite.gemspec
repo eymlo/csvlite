@@ -5,7 +5,7 @@ require 'csvlite/version'
 
 Gem::Specification.new do |spec|
   spec.name          = "csvlite"
-  spec.version       = Csvlite::VERSION
+  spec.version       = CSVLite::VERSION
   spec.authors       = ["Edmund Lo"]
   spec.email         = ["edmund.lo@wishabi.com"]
 
