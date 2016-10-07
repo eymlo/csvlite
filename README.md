@@ -23,15 +23,18 @@ Or install it yourself as:
 ## Usage
 
 User Table
+
 | id        | name           |
 | ----------|:--------------:|
 | 1         | Peter          |
 | 2         | Dan            |
 | 3         | Joey           |
 
+
 Post Table
+
 | id   | user_id     | title           |
-| -----|:-----------:|----------------|
+| -----|:-----------:|----------------:|
 | 1    |   4  | Nothing          |
 | 2    |   3  | To            |
 | 3    |   1  | Do           |
