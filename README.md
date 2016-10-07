@@ -22,7 +22,52 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+User Table
+| id        | name           |
+| ----------|:--------------:|
+| 1         | Peter          |
+| 2         | Dan            |
+| 3         | Joey           |
+
+Post Table
+| id   | user_id     | title           |
+| -----|:-----------:|----------------|
+| 1    |   4  | Nothing          |
+| 2    |   3  | To            |
+| 3    |   1  | Do           |
+
+
+### One off queries (V1)
+```ruby
+query = <<-SQL
+    SELECT post.title FROM user INNER JOIN post ON user.id = post.user_id WHERE user.name = 'Peter'
+SQL
+
+result = CSVLite.query_files(['user.csv', 'post.csv'], query)
+```
+
+### One off queries (V2)
+```ruby
+query = <<-SQL
+    SELECT post.title FROM user INNER JOIN post ON user.id = post.user_id WHERE user.name = 'Peter'
+SQL
+
+lite = CSVLite.new
+lite.load_multiple(['user.csv', 'post.csv'])
+result = lite.query(query)
+```
+
+### Custom table name
+```ruby
+query = <<-SQL
+    SELECT post.title FROM member INNER JOIN post ON member.id = post.user_id WHERE member.name = 'Peter'
+SQL
+
+lite = CSVLite.new
+lite.load_from_csv_file('user.csv', 'member')
+lite.load_from_csv_file('post.csv')
+result = lite.query(query)
+```
 
 ## Development
 
