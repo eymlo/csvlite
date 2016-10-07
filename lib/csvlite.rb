@@ -14,12 +14,26 @@ class CSVLite
     end
   end
 
-  def load_from_csv_file(table_name, csv_file)
+  def load_from_csv_file(csv_file, table_name = nil)
+    if table_name.nil?
+      extn = File.extname  csv_file
+      name = File.basename csv_file, extn
+      table_name = name
+    end
+
     rows = CSV.read(csv_file)
     header = rows.shift
     create_statement = _build_table_schema(table_name, header, rows)
     @db.execute create_statement
     _bulk_insert(table_name, header, rows)
+
+    @db
+  end
+
+  def load_multiple(csv_files)
+    [csv_files].flatten.each do |file|
+      self.load_from_csv_file(file)
+    end
 
     @db
   end
@@ -30,13 +44,7 @@ class CSVLite
 
   def self.query_files(csv_files, query)
     lite = CSVLite.new
-
-    [csv_files].flatten.each do |file|
-      extn = File.extname  file
-      name = File.basename file, extn
-      lite.load_from_csv_file(name, file)
-    end
-
+    lite.load_multiple(csv_files)
     lite.query(query)
   end
 
