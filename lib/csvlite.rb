@@ -1,7 +1,6 @@
 require_relative "./csvlite/version"
 require 'csv'
 require 'sqlite3'
-require 'byebug'
 
 class CSVLite
   attr_reader :db
