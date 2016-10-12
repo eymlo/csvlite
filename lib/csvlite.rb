@@ -32,6 +32,8 @@ class CSVLite
       table_name = name
     end
 
+    table_name = table_name.underscore
+
     rows = CSV.read(csv_file)
     header = rows.shift
     create_statement = _build_table_schema(table_name, header, rows)
