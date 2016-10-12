@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["edmund.lo@wishabi.com"]
 
   spec.summary       = %q{Load CSV into SQL lite}
-  spec.description   = %q{Load CSV into SQL lite}
+  spec.description   = %q{This ruby gem provides simple interface to load CSV file into SQL lite object and allow simple querying}
   spec.homepage      = "https://github.com/eymlo/csvlite"
   spec.license       = "MIT"
 
@@ -29,7 +29,6 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency "bundler", "~> 1.11"
   spec.add_development_dependency "rake", "~> 10.0"
-  spec.add_development_dependency "byebug"
   spec.add_development_dependency "rspec", "~> 3.0"
-  spec.add_runtime_dependency 'sqlite3'
+  spec.add_runtime_dependency 'sqlite3', "~> 1.3"
 end

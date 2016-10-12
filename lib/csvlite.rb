@@ -2,6 +2,17 @@ require_relative "./csvlite/version"
 require 'csv'
 require 'sqlite3'
 
+class String
+  def underscore
+    self.gsub(/::/, '/').
+      gsub(/([A-Z]+)([A-Z][a-z])/,'\1_\2').
+      gsub(/([a-z\d])([A-Z])/,'\1_\2').
+      gsub(/ /,'_').
+      tr("-", "_").
+      downcase
+  end
+end
+
 class CSVLite
   attr_reader :db
 
@@ -69,10 +80,11 @@ class CSVLite
 
     query = "CREATE TABLE #{table_name} (\r\n"
     query += header.map.with_index do |field, i|
-      "'#{field}' VARCHAR(#{(column_lengths[i] / BASE_COLUMN_LENGTH.to_f).ceil * BASE_COLUMN_LENGTH})"
+      "'#{field.underscore}' VARCHAR(#{(column_lengths[i] / BASE_COLUMN_LENGTH.to_f).ceil * BASE_COLUMN_LENGTH})"
     end.join(",\r\n")
 
     query += "\r\n)"
+
+    query
   end
 end
-
