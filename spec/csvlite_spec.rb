@@ -37,5 +37,23 @@ describe CSVlite do
     expect(result[0][6]).to eql('expected')
   end
 
+  it 'works with empty fields' do
+    files = ['../fixtures/c.csv'].map do |file|
+      File.expand_path(file, __FILE__)
+    end
+
+    subject = CSVLite.new
+    subject.load_multiple(files)
+  end
+
+  it 'works with field name with fields' do
+    files = ['../fixtures/space_fields.csv'].map do |file|
+      File.expand_path(file, __FILE__)
+    end
+
+    subject = CSVLite.new
+    subject.load_multiple(files)
+    expect(subject.query("SELECT a_t FROM space_fields")).to eql([['1'],['111']])
+  end
 end
 

@@ -76,7 +76,7 @@ class CSVLite
     rows.each do |row|
       row.each_with_index do |field, index|
         column_lengths[index] ||= 0
-        column_lengths[index] = [column_lengths[index], field.length].max
+        column_lengths[index] = [column_lengths[index], field.nil? ? 0 : field.length].max
       end
     end
 
